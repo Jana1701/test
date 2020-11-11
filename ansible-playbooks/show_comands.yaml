@@ -1,0 +1,17 @@
+---
+
+  - name: PLAY 1 - Displaying show command output
+    hosts: iosxe
+    connection: network_cli
+    gather_facts: no
+
+    tasks:
+
+      - name: TASK 1 in PLAY 1 - Storing output of show command in object named interfaces
+        ios_command:
+          commands: show ip interface brie
+        register: interfaces
+          
+      - name: TASK 2 in PLAY 1 - display contents of interfaces
+        debug:
+          var: interfaces['stdout_lines'][0][8]
